@@ -1,0 +1,75 @@
+.verify {
+    max-width: 600px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.verify__text {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* =========================
+   認証はこちらから（中央寄せ）
+========================= */
+.verify__button {
+    display: block;
+    width: 100%;
+    max-width: 260px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background: #d9d9d9;
+    color: #000;
+    border: 2px solid #000;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 0 auto 1.5rem; /* ← 中央寄せ */
+}
+
+.verify__button:hover {
+    opacity: 0.85;
+}
+
+/* =========================
+   再送エリア（共通位置）
+========================= */
+.verify__resend {
+    min-height: 32px; /* メッセージとボタンの高さ確保 */
+}
+
+/* =========================
+   認証メール再送ボタン
+========================= */
+.verify__resend-button {
+    border: none; /* ボーダー削除 */
+    border-bottom: 1px solid #0073cc; /* 下線追加 */
+    color: #0073cc;
+    padding: 0;
+    font-size: 1rem;
+    cursor: pointer;
+    background: none;
+}
+
+/* =========================
+   再送完了メッセージ
+========================= */
+.verify__message {
+    color: #0073cc;
+    font-size: 1rem;
+    animation: fadeOut 3s ease forwards;
+}
+
+/* 自動で消える */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}

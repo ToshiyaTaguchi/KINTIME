@@ -1,0 +1,148 @@
+/* =========================================
+   申請一覧（管理者）
+========================================= */
+.application-list {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* タイトル */
+.application-list__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-left: 12px;
+    border-left: 6px solid #000;
+}
+
+/* ================================
+   タブ
+================================ */
+.application-list__tabs {
+    display: flex;
+    gap: 30px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 30px;
+}
+
+.application-list__tab {
+    padding: 10px 0;
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+    position: relative;
+}
+
+.application-list__tab.is-active {
+    color: #000;
+    font-weight: bold;
+}
+
+.application-list__tab.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+
+/* ================================
+   テーブル
+================================ */
+.application-list__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.application-list__table thead th {
+    padding: 14px;
+    text-align: center;
+    font-weight: bold;
+    color: #777;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+.application-list__table tbody td {
+    padding: 14px;
+    text-align: center;
+    border-bottom: 1px solid #e1e1e1;
+    font-weight: bold;
+}
+
+.application-list__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ステータス */
+.status--pending {
+    color: #d97706;
+}
+
+.status--approved {
+    color: #15803d;
+}
+
+/* 詳細リンク */
+.application-list__detail-link {
+    color: #000;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* 空表示 */
+.application-list__empty {
+    padding: 20px;
+    color: #999;
+    font-weight: normal;
+}
+
+/* ================================
+   ヘッダー（既存共通）
+================================ */
+/* ナビゲーション */
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-nav__list {
+    display: flex;
+    align-items: center; /* 縦位置を揃える */
+    gap: 1rem;
+    font-weight: bold;
+}
+
+.header-nav__item a {
+    color: #fff;
+    text-decoration: none;
+}
+.header-nav__item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.header-nav__link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #000;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff !important;
+    background: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1; /* 高さを揃える */
+}
+
+.header-nav__link--active {
+    background: #fff;
+    color: #000 !important;
+    border-color: #fff;
+}

@@ -1,0 +1,38 @@
+/* =========================================
+   staff 勤怠一覧 追加スタイル
+   ※ 基本レイアウト・テーブル・月切り替えは
+      attendance/list.css を流用
+========================================= */
+
+/* =========================================
+   CSV 出力ボタン
+========================================= */
+.attendance-staff__csv {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.attendance-staff__csv-button {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.attendance-staff__csv-button:hover {
+    opacity: 0.85;
+}
+
+/* =========================================
+   スマホ対応
+========================================= */
+@media (max-width: 600px) {
+    .attendance-staff__csv-button {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+}

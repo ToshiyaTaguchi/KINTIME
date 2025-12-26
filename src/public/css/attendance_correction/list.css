@@ -1,0 +1,152 @@
+/* =========================================
+   申請一覧 全体
+========================================= */
+.application-list {
+    width: 100%;
+    max-width: 900px;
+}
+
+/* タイトル */
+.application-list__title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 30px;
+    padding-left: 12px;
+    border-left: 6px solid #000;
+}
+
+/* セクション */
+.application-list__section {
+    margin-bottom: 40px;
+}
+
+/* サブタイトル */
+.application-list__subtitle {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* ================================
+   タブ
+================================ */
+.application-list__tabs {
+    display: flex;
+    gap: 30px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 30px;
+}
+
+.application-list__tab {
+    padding: 10px 0;
+    text-decoration: none;
+    color: #666;
+    font-size: 16px;
+    position: relative;
+}
+
+.application-list__tab.is-active {
+    color: #000;
+    font-weight: bold;
+}
+
+.application-list__tab.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+
+/* =========================================
+   テーブル
+========================================= */
+.application-list__table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ヘッダー */
+.application-list__table thead th {
+    padding: 14px;
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+    border-bottom: 2px solid #e1e1e1;
+}
+
+/* ボディ */
+.application-list__table tbody td {
+    padding: 14px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+/* 最終行の下線削除 */
+.application-list__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 詳細リンク */
+.application-list__table a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* 空データ */
+.application-list__table tbody tr td[colspan] {
+    padding: 20px;
+    color: #999;
+    font-weight: normal;
+}
+
+/* ナビゲーション */
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-nav__list {
+    display: flex;
+    align-items: center; /* 縦位置を揃える */
+    gap: 1rem;
+    font-weight: bold;
+}
+
+.header-nav__item a {
+    color: #fff;
+    text-decoration: none;
+}
+.header-nav__item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.header-nav__link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #000;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff !important;
+    background: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1; /* 高さを揃える */
+}
+
+.header-nav__link--active {
+    background: #fff;
+    color: #000 !important;
+    border-color: #fff;
+}

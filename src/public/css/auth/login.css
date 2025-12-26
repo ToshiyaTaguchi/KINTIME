@@ -1,0 +1,101 @@
+/* ================================
+   ログイン画面
+================================ */
+
+.login {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+
+.login__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login__group {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.login__label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.login__input {
+    width: 100%;
+    height: 3.75rem;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.login__error {
+    margin-top: 0.4rem;
+    color: #d00;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* ボタン */
+.login__button {
+    width: 100%;
+    max-width: 680px;
+    height: 3.75rem;
+    background: #000;
+    color: #fff;
+    border: none;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1.5rem;
+}
+
+.login__button:hover {
+    opacity: 0.85;
+}
+
+/* リンク */
+.login__link-box {
+    margin-top: 1.5rem;
+}
+
+.login__link {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #0073cc;
+}
+
+/* ================================
+   モバイル対応
+================================ */
+@media (max-width: 600px) {
+    .login__title {
+        font-size: 1.5rem;
+    }
+
+    .login__input {
+        padding: 0.8rem;
+    }
+
+    .login__button {
+        font-size: 1.1rem;
+        padding: 0.9rem;
+    }
+}

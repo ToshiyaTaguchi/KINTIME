@@ -1,0 +1,105 @@
+/* ================================
+   会員登録画面
+================================ */
+
+.register {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register__title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 5rem;
+}
+
+/* --- form --- */
+
+.register__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register__group {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.register__label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.register__input {
+    width: 100%;
+    height: 3rem;
+    border: 1px solid #000;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+}
+
+.register__error {
+    margin-top: 0.4rem;
+    color: #d00;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* ボタン */
+
+.register__button {
+    width: 100%;
+    max-width: 680px;
+    height: 3.75rem; /* 高さ指定 */
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.register__button:hover {
+    opacity: 0.85;
+}
+
+/* リンク */
+
+.register__link-box {
+    margin-top: 2rem;
+}
+
+.register__link {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #0073cc;
+}
+
+/* ================================
+   モバイル対応
+================================ */
+
+@media (max-width: 600px) {
+    .register__title {
+        font-size: 1.5rem;
+    }
+
+    .register__input {
+        height: 3.5rem;
+    }
+
+    .register__button {
+        height: 3.5rem;
+        font-size: 1.1rem;
+    }
+}

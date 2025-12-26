@@ -1,0 +1,109 @@
+/* =========================================
+   スタッフ一覧
+========================================= */
+
+.staff {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.staff__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-left: 12px;
+    border-left: 6px solid #000;
+}
+
+/* =========================================
+   テーブル
+========================================= */
+
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.staff-table__head th {
+    background: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+}
+
+.staff-table__body td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+/* リンク */
+.staff-table__link {
+    color: #0073cc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.staff-table__link:hover {
+    text-decoration: underline;
+}
+
+/* ナビゲーション */
+.header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-nav__list {
+    display: flex;
+    align-items: center; /* 縦位置を揃える */
+    gap: 1rem;
+    font-weight: bold;
+}
+
+.header-nav__item a {
+    color: #fff;
+    text-decoration: none;
+}
+.header-nav__item:not(:last-child) {
+    margin-right: 1rem;
+}
+
+.header-nav__link {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid #000;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #fff !important;
+    background: #000;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1; /* 高さを揃える */
+}
+
+.header-nav__link--active {
+    background: #fff;
+    color: #000 !important;
+    border-color: #fff;
+}
+
+/* =========================================
+   モバイル対応
+========================================= */
+
+@media (max-width: 768px) {
+    .staff__title {
+        font-size: 20px;
+    }
+
+    .staff-table__head th,
+    .staff-table__body td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
