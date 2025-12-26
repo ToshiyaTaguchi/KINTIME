@@ -72,7 +72,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->group(function () {
     Route::patch('/attendance/{attendance}', [AdminAttendanceController::class, 'update'])->name('admin.attendance.update');
 
     // スタッフ管理
-    Route::get('/admin/staff/list', [AdminUserController::class, 'index'])->name('admin.staff.list');
+    Route::get('/staff/list', [AdminUserController::class, 'index'])->name('admin.staff.list');
     Route::get('/attendance/staff/{id}', [AdminAttendanceController::class, 'staffAttendance'])->name('admin.attendance.staff');
     Route::get('/attendance/staff/{id}/csv', [AdminAttendanceController::class, 'exportStaffAttendanceCsv'])->name('admin.attendance.staff.csv');
 

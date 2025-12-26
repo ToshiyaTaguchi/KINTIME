@@ -15,9 +15,9 @@ KINTIME は、従業員の勤怠打刻・勤怠一覧表示・修正申請・管
 
 ## 使用技術
 
-- PHP 8.3
-- Laravel 10.x
-- MySQL 8.x
+- PHP 8.3.x
+- Laravel 8.x
+- MySQL 8.0.x
 - Docker / docker-compose
 - Nginx
 - phpMyAdmin

@@ -1,17 +1,17 @@
 /* =========================================
-   スタッフ一覧
+   スタッフ一覧 全体
 ========================================= */
-
 .staff {
     width: 100%;
-    max-width: 950px;
+    max-width: 900px;
     margin: 0 auto;
-    text-align: left;
 }
 
+/* タイトル */
 .staff__title {
     font-size: 24px;
     font-weight: bold;
+    text-align: left;
     margin-bottom: 30px;
     padding-left: 12px;
     border-left: 6px solid #000;
@@ -20,35 +20,65 @@
 /* =========================================
    テーブル
 ========================================= */
-
 .staff-table {
     width: 100%;
     border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.staff-table__head th {
-    background: #f5f5f5;
-    padding: 12px;
-    text-align: left;
+/* ヘッダー */
+.staff-table thead th {
+    padding: 14px;
     font-weight: bold;
-    border-bottom: 2px solid #000;
+    color: #888;
+    text-align: center;
+    border-bottom: 2px solid #e1e1e1;
 }
 
-.staff-table__body td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
+/* ボディ */
+.staff-table tbody td {
+    padding: 14px;
+    text-align: center;
+    font-weight: bold;
+    color: #888;
+    border-bottom: 1px solid #e1e1e1;
 }
 
-/* リンク */
+/* 最終行の下線削除 */
+.staff-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* 詳細リンク */
 .staff-table__link {
-    color: #0073cc;
+    color: #000;
+    font-weight: bold;
     text-decoration: none;
-    font-weight: 600;
 }
 
-.staff-table__link:hover {
-    text-decoration: underline;
+/* 空データ（将来用） */
+.staff-table tbody tr td[colspan] {
+    padding: 20px;
+    color: #999;
+    font-weight: normal;
+}
+
+/* =========================================
+   モバイル対応
+========================================= */
+@media (max-width: 768px) {
+    .staff__title {
+        font-size: 20px;
+    }
+
+    .staff-table thead th,
+    .staff-table tbody td {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
 
 /* ナビゲーション */
@@ -90,20 +120,4 @@
     background: #fff;
     color: #000 !important;
     border-color: #fff;
-}
-
-/* =========================================
-   モバイル対応
-========================================= */
-
-@media (max-width: 768px) {
-    .staff__title {
-        font-size: 20px;
-    }
-
-    .staff-table__head th,
-    .staff-table__body td {
-        font-size: 14px;
-        padding: 10px;
-    }
 }
