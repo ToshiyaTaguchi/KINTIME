@@ -1,67 +1,75 @@
-# flea-market(Flea-market Application)
+# KINTIME（勤怠管理アプリ）
 
-Laravel + Docker 環境で構築された勤怠管理アプリケーションです。
+Laravel + Docker 環境で構築した勤怠管理アプリケーションです。
 
 ---
 
-## 環境構築手順
+## 概要
+
+KINTIME は、従業員の勤怠打刻・勤怠一覧表示・修正申請・管理者承認を行うための勤怠管理アプリです。
+
+- 一般ユーザー：出勤 / 退勤 / 勤怠確認 / 修正申請
+- 管理者：スタッフ一覧 / 勤怠一覧 / 修正申請承認
+
+---
+
+## 使用技術
+
+- PHP 8.3
+- Laravel 10.x
+- MySQL 8.x
+- Docker / docker-compose
+- Nginx
+- phpMyAdmin
+- MailHog（開発用メール確認）
+
+---
+
+## 環境構築手順（Makefile 利用・推奨）
 
 ### 1. リポジトリをクローン
 
-1. git@github.com:ToshiyaTaguchi/flea-market-ver.03.git
-2. cd flea-market-ver.03
-
-### 2. 環境変数の設定(docker-compose.yml 用)
-
-このアプリケーションでは、シークレット情報は .env ファイルに記載します。
-プロジェクト直下に .env.docker を作り、以下の項目を追加してください。
-
-## MySQL
-
-```env
-MYSQL_ROOT_PASSWORD=your_root_password
-MYSQL_DATABASE=laravel_db
-MYSQL_USER=laravel_user
-MYSQL_PASSWORD=your_password
+```bash
+git clone git@github.com:ToshiyaTaguchi/KINTIME.git
+cd Kintime
 ```
 
-### 3. Docker の起動
+---
 
-1.  Docker Desktop を起動後、以下を実行
+### 2. 初期セットアップ（最初に 1 回だけ）
 
 ```bash
-     docker-compose --env-file .env.docker up -d --build
+make init
 ```
 
-> _Mac の M1・M2 チップの PC の場合、`no matching manifest for linux/arm64/v8 in the manifest list entries`のメッセージが表示されビルドができないことがあります。
-> エラーが発生する場合は、docker-compose.yml ファイルの「mysql」内に「platform」の項目を追加で記載してください_
+このコマンドで以下が自動実行されます。
 
-```bash
-mysql:
-    platform: linux/x86_64(この文追加)
-    image: mysql:8.0.26
-    environment:
-```
+- Docker コンテナのビルド・起動
+- composer install
+- .env ファイル作成（存在しない場合）
+- アプリケーションキー生成
+- マイグレーション & シーディング
+- storage シンボリックリンク作成
 
-### 4. Laravel 環境構築
+---
 
-1. コンテナに入る
+## よく使う Make コマンド
 
-```bash
-docker-compose exec php bash
-```
+| 内容             | コマンド     |
+| ---------------- | ------------ |
+| コンテナ起動     | make up      |
+| コンテナ停止     | make down    |
+| 再起動           | make restart |
+| DB 初期化        | make fresh   |
+| キャッシュクリア | make cache   |
 
-2. .env ファイルの作成
+---
 
-```bash
-cp .env.example .env
-```
+## Laravel 環境変数（.env）
 
-##　環境変数(シークレット情報)
-このアプリケーションでは、シークレット情報はファイル.env に記載されます。
-Git リポジトリには.env 含まれていないため、以下の項目を.env 追加してください。
+`.env.example` をコピーして作成される `.env` に以下を設定してください。
 
-## Laravel
+### Database
 
 ```env
 DB_CONNECTION=mysql
@@ -69,10 +77,10 @@ DB_HOST=mysql
 DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
+DB_PASSWORD=your_password
 ```
 
-## Mailhog
+### MailHog
 
 ```env
 MAIL_MAILER=smtp
@@ -82,118 +90,28 @@ MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS=no-reply@example.com
-MAIL_FROM_NAME="Laravelアプリ"
+MAIL_FROM_NAME=KINTIME
 ```
 
-## Stripe(開発用)
+---
 
-```env
-STRIPE_KEY=your_stripe_public_key
-STRIPE_SECRET=your_stripe_secret_key
-```
+## アクセス URL
 
-### 5.Laravel 環境構築・初期化
+- アプリケーション：http://localhost
+- phpMyAdmin：http://localhost:8080
+- MailHog：http://localhost:8025
 
-1. Laravel のキャッシュ・ログディレクトリを作成
-
-```bash
-mkdir -p storage/framework/{cache,views} storage/logs bootstrap/cache
-chmod -R 775 storage bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
-
-```
-
-2. アプリケーションキーの作成
-
-```bash
-php artisan key:generate
-```
-
-3. マイグレーションの実行
-
-```bash
-php artisan migrate
-```
-
-4. シーディングの実行
-
-```bash
-php artisan db:seed
-```
-
-5. シンボリックリンクの作成(画像表示用)
-
-```bash
-php artisan storage:link
-```
-
-## ストレージ管理（Git 管理対象・非対象）
-
-1. Git 管理対象
-
-```swift
-storage/app/public/images
-storage/app/public/products
-```
-
-2. Git 非対象
-
-```swift
-storage/app/public/profile_images
-```
-
-## PHPUnit テスト実行時の注意
-
-1. .env.testing ファイルを作成し、テスト用データベースを設定
-
-```bash
-cp .env .env.testing
-```
-
-2. .env.testing に以下を追加
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=demo_test
-DB_USERNAME=laravel_user
-DB_PASSWORD=laravel_pass
-```
-
-3. テスト用データベースを作成
-
-```bash
-docker-compose exec mysql bash
-mysql -u root -p
-CREATE DATABASE demo_test;
-```
-
-4. PHPUnit 実行
-
-```bash
-docker-compose exec php bash
-php artisan test
-```
-
-## 使用技術(実行環境)
-
-- PHP8.4.2
-- Laravel8.83.29
-- MySQL8.0.42
-- Docker
-- Composer 2.2.6
-- phpMyAdmin
-- Mailhog（メール開発用）
-- Stripe（決済機能）
-- PHPUnit（単体テスト実装済み）
+---
 
 ## ER 図
 
-![alt](erd.png)
+![ER図](Kintime.drawio.png)
 
-## URL
+---
 
-- 開発環境：http://localhost/
-- phpMyAdmin:：http://localhost:8080/
-- Mailhog: http://localhost:8025/
+## 補足
+
+- 本プロジェクトでは vendor ディレクトリを Git 管理していないため、`make init` 時に composer install を実行します。
+- storage / bootstrap/cache の権限調整は Makefile 内で対応しています。
+
+---
