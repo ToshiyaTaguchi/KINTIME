@@ -3,35 +3,29 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CustomLoginController extends Controller
 {
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        // バリデーション
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        // LoginRequest の rules() と messages() が自動適用される
+        $request->authenticate();
 
-        // 認証
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+        $request->session()->regenerate();
 
-            // 権限によって振り分けも可能
-            if (Auth::user()->can('admin')) {
-                // 管理者が一般ユーザー用ログイン画面からログインした場合は弾く
-                Auth::logout();
-                return back()->withErrors(['email' => '管理者アカウントは管理者用ログイン画面からログインしてください。']);
-            }
+        // 一般ユーザーか確認
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
-            return redirect()->intended('/attendance/list');
+        if ($user && $user->can('admin')) {
+            Auth::logout();
+            return back()->withErrors([
+                'email' => '管理者アカウントは管理者用ログイン画面からログインしてください。',
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => '認証に失敗しました。',
-        ]);
+        return redirect()->intended('/attendance/list');
     }
 }

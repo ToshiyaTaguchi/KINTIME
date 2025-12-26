@@ -29,9 +29,6 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * 認証失敗時のカスタム処理
-     */
     public function authenticate(): void
     {
         $credentials = $this->only('email', 'password');
