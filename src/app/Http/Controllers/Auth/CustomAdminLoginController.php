@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CustomAdminLoginController extends Controller
 {
@@ -21,8 +22,8 @@ class CustomAdminLoginController extends Controller
             $request->session()->regenerate();
 
             // 管理者権限を確認してリダイレクト
-            if (Auth::user()->can('admin')) {
-                return redirect()->intended('/admin/attendance/list');
+            if (Gate::forUser(Auth::user())->allows('admin')) {
+                return redirect('/admin/attendance/list');
             }
 
             // 万が一管理者用ログインで一般ユーザーがログインした場合
