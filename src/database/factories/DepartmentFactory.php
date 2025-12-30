@@ -11,8 +11,8 @@ class DepartmentFactory extends Factory
 
     public function definition()
     {
-        return [
-            'name' => $this->faker->company, // 適当なダミーデータ
-        ];
+         return [
+            'name' => $this->faker->unique()->company,
+         ];
     }
 }

@@ -6,10 +6,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterRequestTest extends TestCase
 {
-    use RefreshDatabase; // DBをテストごとにリセット
+    use RefreshDatabase;
 
     protected function setUp(): void
     {
@@ -32,7 +33,9 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors('name');
+        $response->assertSessionHasErrors([
+            'name' => 'お名前を入力してください',
+        ]);
     }
 
     /** @test */
@@ -45,7 +48,9 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors('email');
+        $response->assertSessionHasErrors([
+            'email' => 'メールアドレスを入力してください',
+        ]);
     }
 
     /** @test */
@@ -58,7 +63,9 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => '',
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $response->assertSessionHasErrors([
+            'password' => 'パスワードを入力してください',
+        ]);
     }
 
     /** @test */
@@ -71,7 +78,9 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => 'short',
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $response->assertSessionHasErrors([
+            'password' => 'パスワードは8文字以上で入力してください',
+        ]);
     }
 
     /** @test */
@@ -84,7 +93,9 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => 'different123',
         ]);
 
-        $response->assertSessionHasErrors('password');
+        $response->assertSessionHasErrors([
+            'password' => 'パスワードと一致しません',
+        ]);
     }
 
     /** @test */
@@ -97,14 +108,21 @@ class RegisterRequestTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        // コントローラのリダイレクト先に合わせて修正
+        // 正常にリダイレクトされることを確認
         $response->assertRedirect('/attendance/list');
 
-        // DBに登録されていることを確認
+        // DBに保存されていることを確認
         $this->assertDatabaseHas('users', [
             'name' => 'Toshiya',
             'email' => 'test@example.com',
             'role_id' => 2,
         ]);
+
+        // 登録されたユーザーでログイン済みか確認
+        $user = User::where('email', 'test@example.com')->first();
+        $this->assertAuthenticatedAs($user);
+
+        // パスワードはハッシュ化されていることを確認
+        $this->assertTrue(Hash::check('password123', $user->password));
     }
 }
